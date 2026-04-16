@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Aida koch">
+    <title>Set Shaping Mapper</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="intro">
+        <p class="eyebrow">Set shaping theory</p>
+        <h1>Build the correspondence table</h1>
+        <p>
+          Choose the alphabet, the source length, and the redundancy. The program
+          sorts sequences by increasing empirical entropy and matches source
+          sequences with the most shaped expanded sequences.
+        </p>
+      </section>
+
+      <section class="workspace" aria-label="Parameters and results">
+        <form id="shaping-form" class="controls">
+          <label>
+            <span>Alphabet A</span>
+            <input
+              id="alphabet"
+              name="alphabet"
+              type="text"
+              value="0,1"
+              autocomplete="off"
+              aria-describedby="alphabet-help"
+            >
+            <small id="alphabet-help">Use comma-separated symbols, or a compact string such as ABC.</small>
+          </label>
+
+          <label>
+            <span>Length N</span>
+            <input id="length-n" name="length-n" type="number" min="1" max="14" value="4">
+          </label>
+
+          <label>
+            <span>Parameter K</span>
+            <input id="length-k" name="length-k" type="number" min="0" max="14" value="2">
+          </label>
+
+          <label>
+            <span>Computation limit</span>
+            <input id="max-expanded" name="max-expanded" type="number" min="1" value="250000">
+            <small>Maximum number of expanded A^(N+K) sequences to generate.</small>
+          </label>
+
+          <button type="submit">Compute mapping</button>
+        </form>
+
+        <div class="summary-panel" aria-live="polite">
+          <dl id="summary">
+            <div>
+              <dt>Source sequences</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Expanded sequences</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Mappings created</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>Ready</dd>
+            </div>
+          </dl>
+          <button id="download-xls" type="button" disabled>Download Excel</button>
+        </div>
+      </section>
+
+      <section class="results" aria-label="Table preview">
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow">Preview</p>
+            <h2>Ordered correspondences</h2>
+          </div>
+          <p id="preview-note">Compute a table to see the results.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Sequence N</th>
+                <th>N*H0</th>
+                <th>Sequence N+K</th>
+                <th>(N+K)*H0</th>
+              </tr>
+            </thead>
+            <tbody id="mapping-body">
+              <tr>
+                <td colspan="5">No result has been computed yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
